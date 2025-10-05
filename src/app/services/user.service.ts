@@ -13,12 +13,15 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
+
   // Get all users
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.apiUrl}/read.php`).pipe(
       catchError(this.handleError)
     );
   }
+
+
 
   // Create new user
   createUser(user: User): Observable<any> {
@@ -32,6 +35,8 @@ export class UserService {
       catchError(this.handleError)
     );
   }
+
+
 
   // Update user
   updateUser(user: User): Observable<any> {
@@ -49,6 +54,8 @@ export class UserService {
     );
   }
 
+
+
   // Delete user
   deleteUser(id: string): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -59,6 +66,9 @@ export class UserService {
       catchError(this.handleError)
     );
   }
+
+
+
 
   // Error handling
   private handleError(error: HttpErrorResponse) {
@@ -78,7 +88,6 @@ export class UserService {
       }
     }
     
-    console.error('Error Message:', errorMessage);
     return throwError(errorMessage);
   }
 }
