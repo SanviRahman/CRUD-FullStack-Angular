@@ -24,7 +24,6 @@ export class ReadComponent {
         this.loading = false;
       },
       error: (error) => {
-        console.error('Error loading users:', error);
         this.loading = false;
       }
     });
