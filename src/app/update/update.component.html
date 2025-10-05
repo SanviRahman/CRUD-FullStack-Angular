@@ -1,0 +1,68 @@
+<div class="container">
+  <h2>Update User:</h2>
+  
+
+  <!-- Show error if user not found -->
+  <div *ngIf="!loading && error && !submitting" class="error-container">
+    <div class="error-message">{{ error }}</div>
+    <button (click)="cancel()" class="btn-cancel">Back to User List</button>
+  </div>
+
+
+  <form *ngIf="!loading && !error" #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+    <!-- Name -->
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" [(ngModel)]="user.name" #name="ngModel" required
+        placeholder="Enter full name"
+        [disabled]="submitting">
+
+      <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error-message" style="color: red;">
+        <small *ngIf="name.errors?.['required']">Name is required.</small>
+      </div>
+    </div>
+
+    <pre></pre>
+    <!-- Email -->
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" [(ngModel)]="user.email" #email="ngModel" requiredemail
+        placeholder="Enter email address"
+        [disabled]="submitting">
+      <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error-message" style="color: red;">
+        <small *ngIf="email.errors?.['required']">Email is required.</small>
+        <small *ngIf="email.errors?.['email']">Please enter a valid email.</small>
+      </div>
+    </div>
+
+    <pre></pre>
+    <!-- Phone -->
+    <div class="form-group">
+      <label for="phone">Phone:</label>
+      <input type="tel" id="phone" name="phone" [(ngModel)]="user.phone" #phone="ngModel" required
+        pattern="^[0-9]{11}$" placeholder="Enter phone number" [disabled]="submitting">
+
+      <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="error-message" style="color: red;">
+        <small *ngIf="phone.errors?.['required']">Phone number is required.</small>
+        <small *ngIf="phone.errors?.['pattern']">Enter a valid phone number (11 digits).</small>
+      </div>
+    </div>
+
+    <!-- Success message -->
+    <div *ngIf="success" class="success-message" style="color: green;">{{ success }}</div>
+
+    <!-- Error message -->
+    <div *ngIf="error && submitting" class="error-message" style="color:red">{{ error }}</div>
+
+    <div class="form-actions">
+    <pre></pre>
+      <button type="submit" class="btn-submit" [disabled]="submitting || userForm.invalid" style="margin-right: 15px;">
+        {{ submitting ? 'Updating...' : 'Update User' }}
+      </button>
+
+      <button type="button" (click)="cancel()" class="btn-cancel" [disabled]="submitting">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>
