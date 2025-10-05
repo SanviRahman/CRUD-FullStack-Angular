@@ -21,8 +21,6 @@ export class UserService {
     );
   }
 
-
-
   // Create new user
   createUser(user: User): Observable<any> {
     const headers = new HttpHeaders({ 
@@ -36,24 +34,18 @@ export class UserService {
     );
   }
 
-
-
   // Update user
   updateUser(user: User): Observable<any> {
     const headers = new HttpHeaders({ 
       'Content-Type': 'application/json' 
     });
 
-    console.log('Sending update request to:', `${this.apiUrl}/update.php`);
-    console.log('User data:', user);
-    
     return this.http.put(`${this.apiUrl}/update.php`, user, { 
       headers
     }).pipe(
       catchError(this.handleError)
     );
   }
-
 
 
   // Delete user
