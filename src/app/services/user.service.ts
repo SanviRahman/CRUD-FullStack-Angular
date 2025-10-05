@@ -47,7 +47,6 @@ export class UserService {
     );
   }
 
-
   // Delete user
   deleteUser(id: string): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
