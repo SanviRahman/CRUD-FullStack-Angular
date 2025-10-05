@@ -17,7 +17,7 @@
         placeholder="Enter full name"
         [disabled]="submitting">
 
-      <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error-message" style="color: red;">
+      <div *ngIf="name.invalid && name.touched" class="error-message" style="color: red;">
         <small *ngIf="name.errors?.['required']">Name is required.</small>
       </div>
     </div>
@@ -29,7 +29,7 @@
       <input type="email" id="email" name="email" [(ngModel)]="user.email" #email="ngModel" requiredemail
         placeholder="Enter email address"
         [disabled]="submitting">
-      <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error-message" style="color: red;">
+      <div *ngIf="email.invalid && email.touched" class="error-message" style="color: red;">
         <small *ngIf="email.errors?.['required']">Email is required.</small>
         <small *ngIf="email.errors?.['email']">Please enter a valid email.</small>
       </div>
@@ -42,7 +42,7 @@
       <input type="tel" id="phone" name="phone" [(ngModel)]="user.phone" #phone="ngModel" required
         pattern="^[0-9]{11}$" placeholder="Enter phone number" [disabled]="submitting">
 
-      <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="error-message" style="color: red;">
+      <div *ngIf="phone.invalid &&  phone.touched" class="error-message" style="color: red;">
         <small *ngIf="phone.errors?.['required']">Phone number is required.</small>
         <small *ngIf="phone.errors?.['pattern']">Enter a valid phone number (11 digits).</small>
       </div>
