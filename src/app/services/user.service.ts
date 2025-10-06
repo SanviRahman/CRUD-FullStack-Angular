@@ -41,7 +41,8 @@ export class UserService {
       'Content-Type': 'application/json'
     });
 
-    return this.http.put(`${this.apiUrl}/update.php`, JSON.stringify(user), { headers });
+    return this.http.put(`${this.apiUrl}/update.php`, 
+    JSON.stringify(user), { headers });
   }
 
 
