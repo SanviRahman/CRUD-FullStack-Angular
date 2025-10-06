@@ -9,7 +9,7 @@ import { User } from '../models/user';
 })
 export class UserService {
 
-  private apiUrl = 'http://localhost/api'; 
+  private apiUrl = 'http://localhost/api';
 
   constructor(private http: HttpClient) { }
 
@@ -23,35 +23,33 @@ export class UserService {
 
   // Create new user
   createUser(user: User): Observable<any> {
-    const headers = new HttpHeaders({ 
+    const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-    
-    return this.http.post(`${this.apiUrl}/create.php`, user, { 
+
+    return this.http.post(`${this.apiUrl}/create.php`, user, {
       headers
     }).pipe(
       catchError(this.handleError)
     );
   }
+
 
   // Update user
   updateUser(user: User): Observable<any> {
-    const headers = new HttpHeaders({ 
-      'Content-Type': 'application/json' 
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
     });
 
-    return this.http.put(`${this.apiUrl}/update.php`, user, { 
-      headers
-    }).pipe(
-      catchError(this.handleError)
-    );
+    return this.http.put(`${this.apiUrl}/update.php`, JSON.stringify(user), { headers });
   }
+
 
   // Delete user
   deleteUser(id: string): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.request('DELETE', `${this.apiUrl}/delete.php`, { 
-      headers, 
+    return this.http.request('DELETE', `${this.apiUrl}/delete.php`, {
+      headers,
       body: { id }
     }).pipe(
       catchError(this.handleError)
@@ -60,25 +58,24 @@ export class UserService {
 
 
 
-
   // Error handling
   private handleError(error: HttpErrorResponse) {
     console.error('API Error Details:', error);
-    
+
     let errorMessage = 'Unknown error occurred';
-    
+
     if (error.error instanceof ErrorEvent) {
       // Client-side error
       errorMessage = `Client Error: ${error.error.message}`;
     } else {
       // Server-side error
       errorMessage = `Error Code: ${error.status} - ${error.message}`;
-      
+
       if (error.error && error.error.message) {
         errorMessage = error.error.message;
       }
     }
-    
+
     return throwError(errorMessage);
   }
 }
