@@ -17,7 +17,6 @@ export class CreateComponent {
   };
 
   submitting = false;
-  success = '';
   error = '';
 
   constructor(
